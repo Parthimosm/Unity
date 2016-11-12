@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerBullet: MonoBehaviour {
 
+    public GameObject Exp;
     float speed; 
 
 	// Use this for initialization
@@ -30,4 +31,25 @@ public class PlayerBullet: MonoBehaviour {
             Destroy(gameObject); 
         }
 	}
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if ((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag"))
+        {
+            
+            Destroy(gameObject);
+            
+        }
+    }
+
+    //boom function 
+
+    void PlayExplosion()
+    {
+        GameObject explosion = (GameObject)Instantiate(Exp);
+
+        explosion.transform.position = transform.position;
+
+    }
+
 }

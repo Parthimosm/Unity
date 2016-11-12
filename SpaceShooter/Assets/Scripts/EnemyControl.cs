@@ -3,11 +3,12 @@ using System.Collections;
 
 public class EnemyControl : MonoBehaviour
 {
+    public GameObject Exp;
     float speed; 
 	// Use this for initialization
 	void Start ()
     {
-        speed = 2f; 
+        speed = 1f; 
 	}
 	
 	// Update is called once per frame
@@ -28,4 +29,25 @@ public class EnemyControl : MonoBehaviour
         }
 
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if((col.tag == "PlayerShipTag") || (col.tag == "PlayerBulletTag"))
+        {
+            
+            Destroy(gameObject);
+            PlayExplosion();
+        }
+    }
+
+    //boom function 
+
+    void PlayExplosion()
+    {
+        GameObject explosion = (GameObject)Instantiate(Exp);
+
+        explosion.transform.position = transform.position;
+
+    }
+
 }

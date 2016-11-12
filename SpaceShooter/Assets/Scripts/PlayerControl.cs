@@ -6,6 +6,7 @@ public class PlayerControl : MonoBehaviour {
     public GameObject PlayerBulletGO;//player bullet prefab
     public GameObject BulletPosition01;
     public GameObject BulletPosition02;
+    public GameObject Exp; 
 
     public float speed; 
 
@@ -38,7 +39,7 @@ public class PlayerControl : MonoBehaviour {
         } else if(Input.GetKeyUp(KeyCode.LeftShift))
         {
             speed = speed * 2; 
-        }
+        } 
 
         
         Move(direction); 
@@ -66,4 +67,25 @@ public class PlayerControl : MonoBehaviour {
         transform.position = pos; 
 
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag"))
+        {         
+            Destroy(gameObject);
+            PlayExplosion();
+        }
+    }
+
+    //boom function 
+
+    void PlayExplosion()
+    {
+        GameObject explosion = (GameObject)Instantiate(Exp);
+
+        explosion.transform.position = transform.position; 
+
+    }
+
+
 }
